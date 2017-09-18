@@ -3,12 +3,13 @@
 #include<stdlib.h>
 #include<string.h>
 #include<time.h>
+#include<iomanip>
 using namespace std;
 
 int Language;
 int i, n, m, k;
 char ch;
-double user_answer = 0, answer = 0;
+float user_answer = 0, answer = 0;
 int rc = 0, wc = 0;
 void cheak();
 char Operator()
@@ -26,16 +27,16 @@ char Operator()
 
 void integer()
 {
-	int x = 0, y = 0;
+	float x , y ;
 	char op;
-	x = rand() % 100 + 1;
-	y = rand() % 100 + 1;
+	x =(float)( rand() % 100 + 1);
+	y =(float)( rand() % 100 + 1);
 	op = Operator();
 	if (op == '-')
 		while (x < y)
 		{
-			x = rand() % 100 + 1;
-			y = rand() % 100 + 1;
+			x = (float)(rand() % 100 + 1);
+			y = (float)(rand() % 100 + 1);
 		}
 	cout << x << op << y << "=";
 	cin >> user_answer;
@@ -48,47 +49,47 @@ void integer()
 	case '*':
 		answer = x*y; break;
 	case '/':
-		answer = x/y; break;
+		answer = (int)((x / y)*100)/100.0; break;
 	}
 	cheak();
 }
 
 void fraction()
 {
-	int a, b, c, d;
-	a = rand() % 100 + 1;
-	b = rand() % 100 + 1;
-	c = rand() % 100 + 1;
-	d = rand() % 100 + 1;
+	float a, b, c, d;
+	a = (float)(rand() % 100 + 1);
+	b = (float)(rand() % 100 + 1);
+	c = (float)(rand() % 100 + 1);
+	d = (float)(rand() % 100 + 1);
 	char op;
 	while (a <= b || c <= d)
 	{
-		a = rand() % 100 + 1;
-		b = rand() % 100 + 1;
-		c = rand() % 100 + 1;
-		d = rand() % 100 + 1;
+		a = (float)(rand() % 100 + 1);
+		b = (float)(rand() % 100 + 1);
+		c = (float)(rand() % 100 + 1);
+		d = (float)(rand() % 100 + 1);
 	}
 	op = Operator();
 	if (op == '-')
 		while ((b*c - a*d)<0)
 		{
-			a = rand() % 100 + 1;
-			b = rand() % 100 + 1;
-			c = rand() % 100 + 1;
-			d = rand() % 100 + 1;
+			a = (float)(rand() % 100 + 1);
+			b = (float)(rand() % 100 + 1);
+			c = (float)(rand() % 100 + 1);
+			d = (float)(rand() % 100 + 1);
 		}
 	cout << "(" <<b << "/" << a <<")"<< op <<"(" <<d << "/" << c<< ")" << "=";
 	cin >> user_answer;
 	switch (op)
 	{
 	case '+':
-		answer = (b / a) + (d / c); break;
+		answer =(int)(((b / a) + (d / c))*100)/100.0; break;
 	case '-':
-		answer = (b / a )- (d / c); break;
+		answer =(int)(((b / a )- (d / c))*100)/100.0; break;
 	case '*':
-		answer = (b / a) * (d / c); break;
+		answer =(int)(((b / a) * (d / c))*100)/100.0; break;
 	case '/':
-		answer = (b*c)/(a*d); break;
+		answer =(int)(((b*c)/(a*d))*100)/100.0; break;
 	}
 	cheak();
 }
@@ -149,18 +150,19 @@ void eng(){
 			cout << "You're not bad " << endl;
 		else
 			cout << "You're hopeless!" << endl;
-		cout << "Whether to continue? ";
+		cout << "Whether to continue?(Y/y) ";
 		cin >> ch;
 	}
 	return;
 }
 void chi(){
-	cout << "ÇëÊäÈë³öÌâÀàÐÍ" << endl;
-	cout << "1.ÕûÊýËÄÔòÔËËã" << endl;
-	cout << "2.·ÖÊýËÄÔòÔËËã" << endl;
+	cout << "-------------------------------------------------------------------------------------" << endl;
+	cout << "-" << setw(50) << "è¯·è¾“å…¥å‡ºé¢˜ç±»åž‹" << setw(34) << "-" << endl;
+	cout << "-" << setw(50) << "1.æ•´æ•°å››åˆ™è¿ç®—" << setw(34) << "-" << endl;
+	cout << "-" << setw(50) << "2.åˆ†æ•°å››åˆ™è¿ç®—" << setw(34) << "-" << endl;
 	cin >> i;
 	system("cls");
-	cout << "ÇëÊäÈëÌâÄ¿¸öÊý" << endl;
+	cout << "-" << setw(50) << "è¯·è¾“å…¥é¢˜ç›®ä¸ªæ•°" << setw(34) << "-" << endl;
 	cin >> n;
 	for (m = 0; m < n; m++){
 		if (i == 1)
@@ -169,22 +171,23 @@ void chi(){
 			fraction();
 	}
 	k = rc - wc;
-	if (k >= 5)
-		cout << "ÄãµÄ³É¼¨Îª" << k;
-	else if (k >0 && k < 5)
-		cout << "Äã»¹²»Àµ" << endl;
+	if (k >= 2)
+		cout << "ä½ çš„æˆç»©ä¸º" << k;
+	else if (k >0 && k < 2)
+		cout << "ä½ è¿˜ä¸èµ–" << endl;
 	else
-		cout << "ÄãÃ»¾ÈÁË" << endl;
-	cout << "ÊÇ·ñ¼ÌÐø";
+		cout << "ä½ æ²¡æ•‘äº†" << endl;
+	cout << "æ˜¯å¦ç»§ç»­";
 	cin >> ch;
 	while (ch == 'y' || ch == 'Y'){
 		system("cls");
-		cout << "ÇëÊäÈë³öÌâÀàÐÍ" << endl;
-		cout << "1.ÕûÊýËÄÔòÔËËã" << endl;
-		cout << "2.·ÖÊýËÄÔòÔËËã" << endl;
+		cout << "-------------------------------------------------------------------------------------" << endl;
+		cout << "-" << setw(50) << "è¯·è¾“å…¥å‡ºé¢˜ç±»åž‹" << setw(34) << "-" << endl;
+		cout << "-" << setw(50) << "1.æ•´æ•°å››åˆ™è¿ç®—" << setw(34) << "-" << endl;
+		cout << "-" << setw(50) << "2.åˆ†æ•°å››åˆ™è¿ç®—" << setw(34) << "-" << endl;
 		cin >> i;
 		system("cls");
-		cout << "ÇëÊäÈëÌâÄ¿¸öÊý" << endl;
+		cout << "-" << setw(50) << "è¯·è¾“å…¥é¢˜ç›®ä¸ªæ•°" << setw(34) << "-" << endl;
 		cin >> n;
 		for (m = 0; m < n; m++){
 			if (i == 1)
@@ -194,23 +197,23 @@ void chi(){
 		}
 		k = rc - wc;
 		if (k >= 5)
-			cout << "ÄãµÄ³É¼¨Îª" << k;
-		else if (k >0 && k < 5)
-			cout << "Äã»¹²»Àµ" << endl;
+			cout << "ä½ çš„æˆç»©ä¸º" << k << endl;
+		else if (k >0 && k < 4)
+			cout << "ä½ è¿˜ä¸èµ–" << endl;
 		else
-			cout << "ÄãÃ»¾ÈÁË" << endl;
-		cout << "ÊÇ·ñ¼ÌÐø";
+			cout << "ä½ æ²¡æ•‘äº†" << endl;
+		cout << "æ˜¯å¦ç»§ç»­(Y/y)";
 		cin >> ch;
 	}
 	return;
 }
 void jap(){
-	cout << "³öî}¥¿¥¤¥×¤òÈëÁ¦¤·¤ÆÏÂ¤µ¤¤ " << endl;
-	cout << "1.ÕûÊý£´ÑÝËã" << endl;
-	cout << "2.·ÖÊý£´ÑÝËã" << endl;
+	cout << "å‡ºé¡Œã‚¿ã‚¤ãƒ—ã‚’å…¥åŠ›ã—ã¦ä¸‹ã•ã„ " << endl;
+	cout << "1.æ•´æ•°ï¼”æ¼”ç®—" << endl;
+	cout << "2.åˆ†æ•°ï¼”æ¼”ç®—" << endl;
 	cin >> i;
 	system("cls");
-	cout << "î}Ä¿¤òÈëÁ¦¤·¤ÆÏÂ¤µ¤¤ " << endl;
+	cout << "é¡Œç›®ã‚’å…¥åŠ›ã—ã¦ä¸‹ã•ã„ " << endl;
 	cin >> n;
 	for (m = 0; m < n; m++){
 		if (i == 1)
@@ -220,21 +223,21 @@ void jap(){
 	}
 	k = rc - wc;
 	if (k >= 5)
-		cout << "¾ý¤Î³É¿ƒ¤Ï" << k;
+		cout << "å›ã®æˆç¸¾ã¯" << k;
 	else if (k >0 && k < 5)
-		cout << "¾ý¤Ï¤Þ¤À™¤¯¤Ê¤¤ " << endl;
+		cout << "å›ã¯ã¾ã æ‚ªããªã„ " << endl;
 	else
-		cout << "¾ý¤ÏÓÞ¤«¤ËËÀ¤ó¤Ç¤·¤Þ¤Ã¤¿ " << endl;
-	cout << "¾@¾A¤¹¤ë¤«¤É¤¦¤« ";
+		cout << "å›ã¯æ„šã‹ã«æ­»ã‚“ã§ã—ã¾ã£ãŸ " << endl;
+	cout << "ç¶™ç¶šã™ã‚‹ã‹ã©ã†ã‹ ";
 	cin >> ch;
 	while (ch == 'y' || ch == 'Y'){
 		system("cls");
-		cout << "³öî}¥¿¥¤¥×¤òÈëÁ¦¤·¤ÆÏÂ¤µ¤¤ " << endl;
-		cout << "1.ÕûÊý£´ÑÝËã" << endl;
-		cout << "2.·ÖÊý£´ÑÝËã" << endl;
+		cout << "å‡ºé¡Œã‚¿ã‚¤ãƒ—ã‚’å…¥åŠ›ã—ã¦ä¸‹ã•ã„ " << endl;
+		cout << "1.æ•´æ•°ï¼”æ¼”ç®—" << endl;
+		cout << "2.åˆ†æ•°ï¼”æ¼”ç®—" << endl;
 		cin >> i;
 		system("cls");
-		cout << "î}Ä¿¤òÈëÁ¦¤·¤ÆÏÂ¤µ¤¤ " << endl;
+		cout << "é¡Œç›®ã‚’å…¥åŠ›ã—ã¦ä¸‹ã•ã„ " << endl;
 		cin >> n;
 		for (m = 0; m < n; m++){
 			if (i == 1)
@@ -244,12 +247,12 @@ void jap(){
 		}
 		k = rc - wc;
 		if (k >= 5)
-			cout << "¾ý¤Î³É¿ƒ¤Ï" << k;
+			cout << "å›ã®æˆç¸¾ã¯" << k;
 		else if (k >0 && k < 5)
-			cout << "¾ý¤Ï¤Þ¤À™¤¯¤Ê¤¤ " << endl;
+			cout << "å›ã¯ã¾ã æ‚ªããªã„ " << endl;
 		else
-			cout << "¾ý¤ÏÓÞ¤«¤ËËÀ¤ó¤Ç¤·¤Þ¤Ã¤¿ " << endl;
-		cout << "¾@¾A¤¹¤ë¤«¤É¤¦¤« ";
+			cout << "å›ã¯æ„šã‹ã«æ­»ã‚“ã§ã—ã¾ã£ãŸ " << endl;
+		cout << "ç¶™ç¶šã™ã‚‹ã‹ã©ã†ã‹(Y/y) ";
 		cin >> ch;
 	}
 	return;
@@ -257,11 +260,14 @@ void jap(){
 void main()
 {
 	srand(time(0));
-	cout << "please select language" << endl;
-	cout << "1,English" << endl;
-	cout << "2,chinese" << endl;
-	cout << "3,japanese" << endl;
+	cout << "-------------------------------------------------------------------------------------" << endl;
+	cout << "-"<<setw(61) << "Welcome to use Four arithmetic programs" <<setw(23)<<"-"<< endl;
+	cout << "-"<<setw(53)<<"please select language"<<setw(31)<<"-"<< endl;
+	cout << "-"<<setw(45)<<"1,English" <<setw(39)<<"-"<< endl;
+	cout << "-"<<setw(45)<<"2,chinese" <<setw(39)<<"-"<< endl;
+	cout << "-"<<setw(46)<<"3,japanese"<<setw(38)<<"-"<< endl;
 	cin >> Language;
+	system("cls");
 	switch (Language){
 	case 1: eng(); break;
 	case 2: chi(); break;
