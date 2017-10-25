@@ -3,11 +3,12 @@
 #include<math.h>
 #define PeopleNum 10
 typedef struct play{
-	int pnum;				//Íæ¼Ò±àºÅ
-	int snum;				//Íæ¼ÒÊäÈëµÄÊı×Ö
+	int pnum;				//ç©å®¶ç¼–å·
+	int snum;				//ç©å®¶è¾“å…¥çš„æ•°å­—
 	int score;
 }Player;
 Player p[PeopleNum];
+int count = 1;
 double gold = 0.0;
 void input();
 float getgold();
@@ -16,8 +17,14 @@ void print();
 void input(){
 	for (int i = 0; i < PeopleNum; i++){
 		p[i].pnum = i + 1;
-		printf("µÚ%dºÅ£º", i + 1);
+X:		printf("ç¬¬%då·ï¼š", i + 1);
 		scanf_s("%d", &p[i].snum);
+		for (int j = 0; j < i; j++){
+			if (p[i].snum == p[j].snum){
+				printf("æ•°å­—é‡å¤ï¼Œè¯·é‡æ–°è¾“å…¥ï¼š");
+				goto X;
+			}
+		}
 	}
 }
 float getgold(){
@@ -30,9 +37,9 @@ float getgold(){
 void resetscore(){
 	double min = 10000, max = 0;
 	int in_j = 0, in_k = 0;
-	double count[PeopleNum];				//¼ÆËã²îÖµºó´æ·ÅµÄÊı×é
+	double count[PeopleNum];				//è®¡ç®—å·®å€¼åå­˜æ”¾çš„æ•°ç»„
 	for (int i = 0; i < PeopleNum; i++){
-		count[i] = fabs(p[i].snum - gold);				//²îÖµÈ¡¾ø¶ÔÖµ
+		count[i] = fabs(p[i].snum - gold);				//å·®å€¼å–ç»å¯¹å€¼
 	}
 	for (int m = 0; m < PeopleNum; m++){
 		if (count[m] <= min){
@@ -51,23 +58,23 @@ void resetscore(){
 }
 void print(){
 	for (int i = 0; i < PeopleNum; i++){
-		printf("%dºÅÑ¡ÊÖµÃ·Ö£º%d", p[i].pnum, p[i].score);
+		printf("%då·é€‰æ‰‹å¾—åˆ†ï¼š%d", p[i].pnum, p[i].score);
 		printf("\n");
 	}
 }
 void main(){
 	int ch;
-	printf("-------------------------»Æ½ğµãÓÎÏ·-------------------------\n");
+	printf("-------------------------é»„é‡‘ç‚¹æ¸¸æˆ-------------------------\n");
 	while (1){
 		input();
 		gold = getgold() / PeopleNum*(0.618);
 		resetscore();
 		system("cls");
 		print();
-		printf("ÊÇ·ñ¼ÌĞø1");
+		printf("æ˜¯å¦ç»§ç»­1");
 		scanf_s("%d", &ch);
 		if (ch == 1){
-
+			count++;
 		}
 		else{
 			int p_max = 0;
@@ -78,9 +85,10 @@ void main(){
 					j = i;
 				}
 			}
-			printf("¹§Ï²µÚ%dºÅÍæ¼Ò»ñÊ¤", j + 1);
-			getchar();				//¶ÁÈ¡Ò»¸öenter¼ü£¬·ñÕßÖ±½ÓÍË³ö³ÌĞò
-			getchar();           
+			printf("æ­å–œç¬¬%då·ç©å®¶è·èƒœ", j + 1);
+			printf("æ€»å…±çš„æ¸¸æˆå±€æ•°ä¸ºï¼š%d", count);
+			getchar();				//è¯»å–ä¸€ä¸ªenteré”®ï¼Œå¦è€…ç›´æ¥é€€å‡ºç¨‹åº
+			getchar();
 			exit(0);
 		}
 	}
